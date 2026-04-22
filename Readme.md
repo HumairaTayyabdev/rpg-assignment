@@ -1,5 +1,7 @@
 ## Assignment 
-**IMPORTANT: You must build your assignment on top of this existing codebase. Do not create a new project from scratch.**
+**IMPORTANT**: 
+- **You must build your assignment on top of this existing codebase. Do not create a new project from scratch.**
+- **Please fork this repository for your submission. Do not open Pull Requests directly against this repository.**
 
 The application should have the following features:
 - User authentication: The application should allow users to create an account and log in.
