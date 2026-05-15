@@ -1,27 +1,77 @@
-## Assignment 
-**IMPORTANT**: 
-- **You must build your assignment on top of this existing codebase. Do not create a new project from scratch.**
-- **Please fork this repository for your submission. Do not open Pull Requests directly against this repository.**
+# RPG Blogs
 
-The application should have the following features:
-- User authentication: The application should allow users to create an account and log in.
-- Blog creation: Users should be able to write simple blog posts consisting of just plain text.
-- Real-time notifications: Whenever a new blog is published by any user, all the users on the platform should be notified in real-time (without requiring a page reload) in the application itself.
+A full-stack blogging app with user authentication, plain-text posts, and real-time notifications when anyone publishes. Built on the RPG assignment starter: **Vue 3**, **NestJS**, **GraphQL**, **PostgreSQL**, and **Redis**.
 
-**Required Technical Stack:**
-- **Vue 3** (mandatory)
-- **NestJS** (mandatory) - You must use NestJS for the backend. Plain Node.js is not acceptable.
-- **TypeScript** (mandatory) - All code must be written in TypeScript. JavaScript is not allowed.
-- **GraphQL** (mandatory)
-- **SQL database (required)** - Please use a SQL database (e.g., PostgreSQL, MySQL, SQLite) for data persistence. This helps standardize submissions and provides more content for us to follow-up on during the review process.
+## Features
 
+**Authentication** | Sign up and log in; JWT stored in the browser; protected `/blogs` route |
+**Blog posts** | Create, edit, and delete your own posts; browse all posts or “My blogs” |
+**Real-time updates** | GraphQL subscription (`blogPublished`) updates the feed and toasts without reload |
+**Notifications** | In-app “Signal desk” panel; unread badge; open a post from a notification |
 
-### Notes
-- This project has been set up with Vue3 (Not Nuxt 3) and Nest.js with Graphql. It has a hello world graphql and REST endpoint.
-- **You must extend this existing codebase** - Do not create a separate project or use a different setup.
-- **TypeScript is mandatory** - All backend and frontend code must be written in TypeScript.
-- **NestJS is mandatory** - The backend must be built using NestJS framework.
-- For the purposes of this project, please avoid Firebase and other Backend-as-a-Service tools because they abstract away too many implementation details for us to properly grade submissions.
+## Tech stack
 
-### Submission Requirements
-- **Video demonstration**: Please submit a video demonstrating the app working. The video should show all the required features in action (user authentication, blog creation, and real-time notifications).
+Frontend | Vue 3, Vite, Vue Router, Apollo Client, GraphQL WS |
+Backend | NestJS, Apollo GraphQL, TypeORM, class-validator |
+Database | PostgreSQL 16 |
+Pub/sub | Redis (subscriptions); in-memory fallback when `REDIS_DISABLED=true` |
+
+## Prerequisites
+
+**Node.js** 20.19+ or 22.12+ (frontend `engines`)
+**npm** (or yarn) in `backend/` and `frontend/`
+**Docker** (recommended) for PostgreSQL and Redis, or local installs on ports `5432` and `6379`
+
+## Quick start
+
+### 1. Start PostgreSQL and Redis
+
+From the repository root:
+
+```bash
+docker compose up -d
+```
+
+This starts:
+
+- PostgreSQL on `localhost:5432` (`rpg_user` / `rpg_password` / `rpg_blog`)
+- Redis on `localhost:6379`
+
+### 2. Configure and run the backend
+
+```bash
+cd backend
+cp .env.example .env
+npm install
+npm run start:dev
+```
+
+- GraphQL HTTP: [http://localhost:3200/graphql](http://localhost:3200/graphql)
+- GraphQL WebSocket: `ws://localhost:3200/graphql-ws`
+
+See [backend/README.md](./backend/README.md) for API details, tests, and environment variables.
+
+### 3. Run the frontend
+
+In a second terminal:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173).
+
+See [frontend/README.md](./frontend/README.md) for build, lint, and Cypress E2E tests.
+
+## Root scripts
+
+From the repository root (after `npm install` in `backend` and `frontend`):
+
+`npm run lint` | ESLint with auto-fix (backend + frontend) |
+`npm run lint:check` | ESLint without fix (CI-friendly) |
+`npm run e2e` | Cypress headless (frontend) |
+`npm run e2e:chrome` | Cypress in Chrome |
+
+E2E tests need **backend** and **frontend** running. See [frontend/README.md](./frontend/README.md#end-to-end-tests-cypress).

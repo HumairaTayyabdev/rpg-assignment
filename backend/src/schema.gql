@@ -6,6 +6,78 @@ type HelloWorldModel {
   value: String!
 }
 
+type UserModel {
+  id: ID!
+  name: String!
+  email: String!
+  createdAt: DateTime!
+}
+
+scalar DateTime
+
+type AuthPayload {
+  token: String!
+  user: UserModel!
+}
+
+type BlogPostModel {
+  id: ID!
+  title: String!
+  content: String!
+  authorId: ID!
+  authorName: String!
+  createdAt: DateTime!
+}
+
+type BlogPublishedPayload {
+  post: BlogPostModel!
+  authorName: String!
+}
+
+type BlogNotificationModel {
+  id: ID!
+  read: Boolean!
+  createdAt: DateTime!
+  post: BlogPostModel!
+}
+
 type Query {
   sayHello: HelloWorldModel!
+  me: UserModel
+  allBlogPosts: [BlogPostModel!]!
+  myNotifications: [BlogNotificationModel!]!
+}
+
+type Mutation {
+  signUp(input: SignUpInput!): AuthPayload!
+  logIn(input: LogInInput!): AuthPayload!
+  markAllNotificationsRead: Boolean!
+  createPost(input: CreatePostInput!): BlogPostModel!
+  updatePost(id: String!, input: UpdatePostInput!): BlogPostModel!
+  deletePost(id: String!): Boolean!
+}
+
+input SignUpInput {
+  name: String!
+  email: String!
+  password: String!
+}
+
+input LogInInput {
+  email: String!
+  password: String!
+}
+
+input CreatePostInput {
+  title: String!
+  content: String!
+}
+
+input UpdatePostInput {
+  title: String!
+  content: String!
+}
+
+type Subscription {
+  blogPublished: BlogPublishedPayload!
 }

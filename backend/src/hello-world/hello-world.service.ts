@@ -2,9 +2,9 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class HelloWorldService {
-  async sayHello() {
+  sayHello() {
     return {
-      value: 'Hello World!'
-    }
+      value: 'Hello World!',
+    };
   }
 }

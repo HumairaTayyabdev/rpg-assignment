@@ -1,0 +1,11 @@
+{
+  "name": "rpg-assignment",
+  "private": true,
+  "description": "RPG assignment (NestJS backend + Vue frontend)",
+  "scripts": {
+    "lint": "npm run lint --prefix backend && npm run lint --prefix frontend",
+    "lint:check": "npm run lint:check --prefix backend && npm run lint:check --prefix frontend",
+    "e2e": "npm run e2e --prefix frontend",
+    "e2e:chrome": "npm run e2e:chrome --prefix frontend"
+  }
+}

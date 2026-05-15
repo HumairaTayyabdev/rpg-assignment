@@ -13,13 +13,19 @@
     "build-only": "vite build",
     "type-check": "vue-tsc --build",
     "lint": "eslint . --fix --cache",
-    "format": "prettier --write --experimental-cli src/"
+    "lint:check": "eslint . --cache --max-warnings 0",
+    "format": "prettier --write --experimental-cli src/",
+    "e2e": "cypress run",
+    "e2e:chrome": "cypress run --browser chrome",
+    "e2e:open": "cypress open",
+    "e2e:open:chrome": "cypress open --browser chrome"
   },
   "dependencies": {
-    "@apollo/client": "^4.0.11",
+    "@apollo/client": "^3.13.10",
     "@vue/apollo-composable": "^4.2.2",
     "graphql": "^16.12.0",
     "graphql-tag": "^2.12.6",
+    "graphql-ws": "^6.0.8",
     "vue": "^3.5.25",
     "vue-router": "^4.6.3"
   },
@@ -30,6 +36,7 @@
     "@vue/eslint-config-prettier": "^10.2.0",
     "@vue/eslint-config-typescript": "^14.6.0",
     "@vue/tsconfig": "^0.8.1",
+    "cypress": "^15.15.0",
     "eslint": "^9.39.1",
     "eslint-plugin-vue": "~10.5.1",
     "jiti": "^2.6.1",

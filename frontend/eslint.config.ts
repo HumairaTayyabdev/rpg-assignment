@@ -14,9 +14,31 @@ export default defineConfigWithVueTs(
     files: ['**/*.{ts,mts,tsx,vue}'],
   },
 
-  globalIgnores(['**/dist/**', '**/dist-ssr/**', '**/coverage/**']),
+  globalIgnores(['**/dist/**', '**/dist-ssr/**', '**/coverage/**', '**/cypress/downloads/**']),
 
   pluginVue.configs['flat/essential'],
   vueTsConfigs.recommended,
   skipFormatting,
+
+  {
+    name: 'cypress/e2e',
+    files: ['cypress/**/*.ts'],
+    languageOptions: {
+      parserOptions: {
+        project: null,
+      },
+      globals: {
+        describe: 'readonly',
+        it: 'readonly',
+        beforeEach: 'readonly',
+        expect: 'readonly',
+        cy: 'readonly',
+        Cypress: 'readonly',
+      },
+    },
+    rules: {
+      '@typescript-eslint/no-unused-expressions': 'off',
+      '@typescript-eslint/no-namespace': 'off',
+    },
+  },
 )

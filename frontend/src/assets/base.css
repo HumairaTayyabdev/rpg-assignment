@@ -1,4 +1,4 @@
-/* color palette from <https://github.com/vuejs/theme> */
+/* Base Vue theme tokens (kept for compatibility) */
 :root {
   --vt-c-white: #ffffff;
   --vt-c-white-soft: #f8f8f8;
@@ -21,33 +21,53 @@
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
 }
 
-/* semantic color variables for this project */
+/* rePurpose-inspired brand (logo + marketing site) */
 :root {
-  --color-background: var(--vt-c-white);
-  --color-background-soft: var(--vt-c-white-soft);
-  --color-background-mute: var(--vt-c-white-mute);
+  --rp-teal-950: #022924;
+  --rp-teal-900: #003d36;
+  --rp-teal-800: #004d40;
+  --rp-teal-700: #0d6b5f;
+  --rp-teal-600: #1a7a6e;
+  --rp-teal-200: #a3e4dc;
+  --rp-teal-100: #d0f0f0;
+  --rp-teal-50: #eef9f7;
 
-  --color-border: var(--vt-c-divider-light-2);
-  --color-border-hover: var(--vt-c-divider-light-1);
+  --rp-orange: #f26522;
+  --rp-orange-hover: #e05518;
 
-  --color-heading: var(--vt-c-text-light-1);
-  --color-text: var(--vt-c-text-light-1);
+  --rp-peach: #fdf2e9;
+  --rp-peach-deep: #ffe9d9;
 
-  --section-gap: 160px;
+  --rp-white: #ffffff;
+  --rp-surface: #ffffff;
+  --rp-surface-2: #f6faf9;
+
+  --rp-text: #1a1f1e;
+  --rp-text-muted: #4a5654;
+  --rp-text-soft: #6b7875;
+
+  --rp-border: rgba(0, 77, 64, 0.12);
+  --rp-border-strong: rgba(0, 77, 64, 0.2);
+
+  --rp-shadow: 0 8px 28px rgba(0, 61, 54, 0.08);
+  --rp-shadow-lg: 0 22px 50px rgba(0, 61, 54, 0.12);
+
+  --rp-focus: rgba(13, 107, 95, 0.35);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: var(--vt-c-black);
-    --color-background-soft: var(--vt-c-black-soft);
-    --color-background-mute: var(--vt-c-black-mute);
+/* Semantic tokens — light brand surface */
+:root {
+  --color-background: var(--rp-white);
+  --color-background-soft: var(--rp-surface-2);
+  --color-background-mute: var(--rp-peach);
 
-    --color-border: var(--vt-c-divider-dark-2);
-    --color-border-hover: var(--vt-c-divider-dark-1);
+  --color-border: var(--rp-border);
+  --color-border-hover: var(--rp-border-strong);
 
-    --color-heading: var(--vt-c-text-dark-1);
-    --color-text: var(--vt-c-text-dark-2);
-  }
+  --color-heading: var(--rp-teal-900);
+  --color-text: var(--rp-text-muted);
+
+  --section-gap: 160px;
 }
 
 *,
@@ -61,10 +81,13 @@
 body {
   min-height: 100vh;
   color: var(--color-text);
-  background: var(--color-background);
+  background:
+    radial-gradient(circle at 0% 0%, rgba(208, 240, 240, 0.55) 0%, transparent 42%),
+    radial-gradient(circle at 100% 8%, rgba(253, 242, 233, 0.75) 0%, transparent 40%),
+    linear-gradient(180deg, var(--rp-surface-2) 0%, var(--rp-white) 50%);
   transition:
-    color 0.5s,
-    background-color 0.5s;
+    color 0.35s ease,
+    background-color 0.35s ease;
   line-height: 1.6;
   font-family:
     Inter,
